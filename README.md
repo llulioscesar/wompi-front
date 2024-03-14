@@ -37,4 +37,4 @@ Los pull requests deben hacerse en ramas separadas y dirigirse a la rama princip
 
 ---
 
-Nota: Este proyecto es una demostración y no debe utilizarse con datos reales de tarjetas de crédito.
+Nota: Este proyecto es una demostración y no debe utilizarse con datos reales de tarjetas de crédito
