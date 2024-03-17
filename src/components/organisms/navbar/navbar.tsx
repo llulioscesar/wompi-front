@@ -7,7 +7,7 @@ import {NavbarLink, NavbarCart, NavbarToggle, NavbarSearch} from "@components/el
 
 const Navbar: FC = () => {
     return (
-        <>
+        <header>
             <nav className="bg-bg-color">
                 <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                     <Link href="/">
@@ -31,7 +31,7 @@ const Navbar: FC = () => {
 
                 </div>
             </nav>
-        </>
+        </header>
     )
 }
 

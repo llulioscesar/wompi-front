@@ -17,8 +17,6 @@ const NavbarSearch: FC = () => {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-    console.log(windowWidth)
-
     return (
         <>
             {windowWidth && windowWidth >= 768 && (
