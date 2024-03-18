@@ -3,7 +3,7 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {ProductDetailVariation} from "@components/templates";
 import {initialState} from "./state";
-import {RootState} from "../redux";
+import {RootState} from "../redux/redux";
 import {ProductImageView} from "@components/molecules";
 
 const slice = createSlice({
@@ -21,7 +21,9 @@ const slice = createSlice({
         },
         setColor: (state, {payload}: PayloadAction<string>) => {
             state.color = payload;
-            state.images = state.variations.find((variation) => variation.color === payload)?.images.map((image) => ({url: image, alt: payload}));
+
+            const imgs = state.variations.find((variation) => variation.color === payload)?.images.map((image) => ({url: image, alt: payload}))
+            state.images = imgs || [];
         },
         setPrice: (state, {payload}: PayloadAction<number>) => {
             state.price = payload;

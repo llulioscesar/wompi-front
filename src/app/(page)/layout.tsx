@@ -1,7 +1,7 @@
 import { Montserrat } from "next/font/google";
 import "./globals.sass";
 import {Navbar} from "@components/organisms";
-import {StoreProvider} from "@store";
+import {StoreProvider} from "@store/redux";
 
 const inter = Montserrat({ subsets: ["latin"] });
 
