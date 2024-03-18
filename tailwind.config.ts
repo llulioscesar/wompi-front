@@ -26,6 +26,21 @@ const config: Config = {
         'clamp-18-36': 'clamp(18px, 4vw, 36px)',
         'clamp-32-64': 'clamp(32px, 4vw, 64px)',
       },
+      animation: {
+        'swirl-in-fwd': 'swirl-in-fwd 0.6s ease-out both',
+      },
+      keyframes: {
+        'swirl-in-fwd': {
+            '0%': {
+              transform: 'rotate(-540deg) scale(0)',
+              opacity: '0'
+            },
+            '100%': {
+              transform: 'rotate(0) scale(1)',
+              opacity: '1'
+            },
+        }
+      }
     },
   },
   plugins: [],
