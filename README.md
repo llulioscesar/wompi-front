@@ -11,6 +11,16 @@ El proceso de negocio se divide en cuatro pasos principales:
 3. **Resumen y Pago**: Se muestra un resumen del pago y se solicita la confirmación del usuario.
 4. **Resultado de la Transacción**: La aplicación muestra el resultado de la transacción, que puede ser exitoso o fallido.
 
+## Diseño de la interfaz de usuario
+
+[Diseño en Figma](https://www.figma.com/file/QspMpEDNzREoQbazG1VmJZ/Wompi?type=design&node-id=2%3A2&mode=design&t=UucIcpHAr54e3e6V-1)
+
+### Diseño para Escritorio
+![ui-desk.jpg](doc%2Fui-desk.jpg)
+
+### Diseño para Móviles
+![ui-mobile.jpg](doc%2Fui-mobile.jpg)
+
 ## Requisitos Mínimos
 
 - Desarrollo en ReactJS (v18+) o VueJS (v2+) con la última versión LTS de Node.js.
