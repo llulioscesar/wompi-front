@@ -11,10 +11,17 @@ const slice = createSlice({
         setShowFormCreditCard: (state, {payload}: PayloadAction<boolean>) => {
             state.showFormCreditCard = payload;
             state.showResumen = false;
+            state.showFinishBuy = false;
         },
         setShowResumen: (state, {payload}: PayloadAction<boolean>) => {
             state.showResumen = payload;
             state.showFormCreditCard = false;
+            state.showFinishBuy = false;
+        },
+        setShowFinishBuy: (state, {payload}: PayloadAction<boolean>) => {
+            state.showFinishBuy = payload;
+            state.showFormCreditCard = false;
+            state.showResumen = false;
         }
     }
 });
@@ -22,6 +29,7 @@ const slice = createSlice({
 export const {
     setShowFormCreditCard,
     setShowResumen,
+    setShowFinishBuy,
 } = slice.actions;
 
 export default slice.reducer;
