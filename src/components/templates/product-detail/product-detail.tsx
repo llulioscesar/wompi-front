@@ -11,17 +11,22 @@ import {
     ProductSize
 } from "@components/molecules";
 import {Button} from "@components/atoms";
-import {ProductDetailRelated} from "@components/organisms";
+import {FormCreditCard, ProductDetailRelated} from "@components/organisms";
+import {
+    useAppDispatch,
+    useAppSelector
+} from "@store/redux";
 import {
     productSelector,
-    setColor, setId,
+    setColor,
+    setId,
     setName,
     setPrice,
     setSize,
-    setVariations,
-    useAppDispatch,
-    useAppSelector
-} from "@store";
+    setVariations
+} from "@store/product";
+import {useShowFormCreditCard} from "@hooks";
+
 
 type Size = {
     size: string;
@@ -56,7 +61,15 @@ type Props = {
 
 const ProductDetail: FC<Props> = (props) => {
 
-    const {id: productId, title, heroText, description, variations, brand, related} = props;
+    const {
+        id: productId,
+        title,
+        heroText,
+        description,
+        variations,
+        brand,
+        related,
+    } = props;
 
     const dispatch = useAppDispatch();
     const {
@@ -67,7 +80,9 @@ const ProductDetail: FC<Props> = (props) => {
         images,
         colors,
         sizes,
-    } = useAppSelector(productSelector);
+        } = useAppSelector(productSelector);
+
+    const showFormCreditCard = useShowFormCreditCard();
 
     useEffect(() => {
         if (productId !== id && id === undefined) {
@@ -86,29 +101,25 @@ const ProductDetail: FC<Props> = (props) => {
         dispatch(setColor(color));
     }
 
+    const openFormCreditCard = () => {
+        showFormCreditCard(true);
+    }
+
     return (
         <>
-            <section
-                className="max-w-screen-xl mx-auto px-4 md:mt-20 mt-5"
-            >
+            <section className="max-w-screen-xl mx-auto px-4 md:mt-20 mt-5">
+                <div className="block md:grid md:grid-cols-product gap-4">
 
-                <div
-                    className="block md:grid md:grid-cols-product gap-4"
-                >
                     <div>
                         <ProductDetailHeroText
                             mainText={heroText.mainText}
                             subText={heroText.subText}
                             specialText={heroText.specialText}
                         />
-                        <h1
-                            className="text-clamp-32-64 font-bold mt-5 md:mt-24 md:mb-24"
-                        >
+                        <h1 className="text-clamp-32-64 font-bold mt-5 md:mt-24 md:mb-24">
                             {title}
                         </h1>
-                        <p
-                            className="text-base md:block hidden"
-                        >
+                        <p className="text-base md:block hidden">
                             {description}
                         </p>
                     </div>
@@ -117,7 +128,6 @@ const ProductDetail: FC<Props> = (props) => {
                         images={images}
                         className="md:mb-0 mb-10"
                     />
-
 
                     <div>
                         <ProductDetailBrand name={brand}/>
@@ -132,56 +142,30 @@ const ProductDetail: FC<Props> = (props) => {
                         )}
                         <ProductDetailSizes
                             sizes={sizes}
-                            sizeSelected={{size: size || '', price: price||0}}
+                            sizeSelected={{size: size || '', price: price || 0}}
                             onSizeSelected={onSizeSelected}
                         />
-
                         {price !== undefined && (
                             <ProductDetailPrice price={price}/>
                         )}
-
-                        <Button className="w-full mt-10">
+                        <Button className="w-full mt-10" onClick={openFormCreditCard}>
                             Pagar con <br/> tarjeta de credito
                         </Button>
                     </div>
+
                 </div>
 
-                <p
-                    className="text-base md:hidden block mt-10"
-                >
+                <p className="text-base md:hidden block mt-10">
                     {description}
                 </p>
+
             </section>
 
             <ProductDetailRelated products={related}/>
 
-            <section>
-                <div className="mx-auto max-w-lg mt-40">
-                    <div className="bg-white rounded-lg overflow-hidden shadow-lg">
-                        <div className="px-6 py-4">
-                            <div className="flex justify-between items-center">
-                                <img className="h-8" src="https://www.svgrepo.com/show/499847/company.svg"
-                                     alt="Workflow logo"/>
-                                <span className="font-medium text-gray-600">05/24</span>
-                            </div>
-                            <div className="mt-4">
-                                <div className="font-bold text-gray-800 text-xl">**** **** **** 1234</div>
-                                <div className="flex justify-between items-center mt-2">
-                                    <div className="text-sm text-gray-600">CARDHOLDER NAME</div>
-                                    <img className="h-10 w-10" src="https://www.svgrepo.com/show/362011/mastercard.svg"
-                                         alt="Mastercard logo"/>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="bg-gray-100 px-6 py-4">
-                            <div className="font-medium text-gray-600">CARD VERIFICATION VALUE</div>
-                            <div className="text-lg font-bold text-gray-800 mt-2">***</div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <FormCreditCard/>
         </>
-    )
+    );
 }
 
 export default ProductDetail;

@@ -48,7 +48,6 @@ export default async function Home(props: Props) {
                 variations={variations}
                 related={related}
             />
-
         </main>
     );
 }
