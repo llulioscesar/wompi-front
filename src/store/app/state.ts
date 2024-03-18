@@ -2,8 +2,10 @@
 
 export type AppState = {
     showFormCreditCard: boolean;
+    showResumen: boolean;
 }
 
 export const initialState: AppState = {
-    showFormCreditCard: false
+    showFormCreditCard: false,
+    showResumen: false
 }

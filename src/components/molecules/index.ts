@@ -7,3 +7,4 @@ export * from './product-detail-imagen-view';
 export * from './product-detail-sizes';
 export * from './product-detail-price';
 export * from './product-related';
+export * from './modal';

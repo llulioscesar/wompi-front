@@ -10,12 +10,18 @@ const slice = createSlice({
     reducers: {
         setShowFormCreditCard: (state, {payload}: PayloadAction<boolean>) => {
             state.showFormCreditCard = payload;
+            state.showResumen = false;
+        },
+        setShowResumen: (state, {payload}: PayloadAction<boolean>) => {
+            state.showResumen = payload;
+            state.showFormCreditCard = false;
         }
     }
 });
 
 export const {
-    setShowFormCreditCard
+    setShowFormCreditCard,
+    setShowResumen,
 } = slice.actions;
 
 export default slice.reducer;

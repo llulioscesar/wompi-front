@@ -11,7 +11,7 @@ import {
     ProductSize
 } from "@components/molecules";
 import {Button} from "@components/atoms";
-import {FormCreditCard, ProductDetailRelated} from "@components/organisms";
+import {FormCreditCard, ProductDetailRelated, Resumen} from "@components/organisms";
 import {
     useAppDispatch,
     useAppSelector
@@ -164,6 +164,8 @@ const ProductDetail: FC<Props> = (props) => {
             <ProductDetailRelated products={related}/>
 
             <FormCreditCard/>
+
+            <Resumen/>
         </>
     );
 }
