@@ -7,11 +7,14 @@ import {FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE} from "redux-persist/e
 import {setupListeners} from "@reduxjs/toolkit/query";
 import rootReducer from "./reducer";
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
+import {PersistConfig} from "redux-persist/es/types";
+import {paymentApi} from "@store/payment";
 
-const persistConfig = {
+const persistConfig: PersistConfig<RootState> = {
     key: 'root',
     version: 1,
     storage,
+    blacklist: ['payment'],
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -22,7 +25,9 @@ const store = configureStore({
         serializableCheck: {
             ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
         },
-    }),
+    }).concat(
+        paymentApi.middleware,
+    ),
 });
 
 setupListeners(store.dispatch);

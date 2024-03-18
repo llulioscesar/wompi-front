@@ -3,9 +3,11 @@
 export type AppState = {
     showFormCreditCard: boolean;
     showResumen: boolean;
+    showFinishBuy: boolean;
 }
 
 export const initialState: AppState = {
     showFormCreditCard: false,
-    showResumen: false
+    showResumen: false,
+    showFinishBuy: false,
 }

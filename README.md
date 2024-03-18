@@ -40,7 +40,8 @@ Se evaluará la aplicación en base a la calidad de la UI/UX, la cobertura de la
 ## Instrucciones para Ejecutar y Probar la Aplicación
 
 ### Variables de Entorno
- - `API_URL`: URL de la API.
+ - `API_URL`: URL de la API para obtener datos del lado del servidor.
+ - `NEXT_PUBLIC_API_URL`: URL de la API para obtener datos del lado del cliente.
 
 (Sigue con instrucciones detalladas para la configuración, ejecución y prueba de la aplicación.)
 
