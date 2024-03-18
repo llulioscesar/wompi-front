@@ -3,6 +3,7 @@
 import React, {FC} from 'react';
 import Image from "next/image";
 import Link from "next/link";
+import {formatPrice} from "@utils";
 
 type Props = {
     title: string;
@@ -28,7 +29,7 @@ const ProductRelated: FC<Props> = (props) => {
                 >
                     {title}
                 </p>
-                <p>{price}</p>
+                <p>{formatPrice(price)}</p>
             </Link>
         </>
     )

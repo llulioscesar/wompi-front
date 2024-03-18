@@ -1,34 +1,47 @@
 'use client';
 
-import React, {FC, useState, useEffect} from 'react';
+import React, {FC, useEffect} from 'react';
 import {
     ProductDetailBrand,
     ProductDetailColors,
     ProductDetailHeroText,
-    ProductDetailImagenView, ProductDetailPrice, ProductDetailSizes,
-    ProductImageView, ProductSize
+    ProductDetailImagenView,
+    ProductDetailPrice,
+    ProductDetailSizes,
+    ProductSize
 } from "@components/molecules";
 import {Button} from "@components/atoms";
 import {ProductDetailRelated} from "@components/organisms";
+import {
+    productSelector,
+    setColor, setId,
+    setName,
+    setPrice,
+    setSize,
+    setVariations,
+    useAppDispatch,
+    useAppSelector
+} from "@store";
 
 type Size = {
     size: string;
     price: number;
 };
 
-type Variation = {
+export type ProductDetailVariation = {
     color: string;
     sizes: Size[];
     images: string[];
 }
 
-type Related = {
+export type Related = {
     title: string;
     image: string;
     price: number;
 }
 
 type Props = {
+    id: string;
     title: string;
     heroText: {
         mainText: string;
@@ -37,60 +50,41 @@ type Props = {
     };
     brand: string;
     description: string;
-    variations: Variation[];
+    variations: ProductDetailVariation[];
     related: Related[];
 };
 
 const ProductDetail: FC<Props> = (props) => {
 
-    const {title, heroText, description, variations, brand, related} = props;
+    const {id: productId, title, heroText, description, variations, brand, related} = props;
 
-    const [images, setImages] = useState<ProductImageView[]>([]);
-    const [colors, setColors] = useState<string[]>([]);
-    const [currentColor, setCurrentColor] = useState<string | undefined>(undefined);
-    const [sizes, setSizes] = useState<ProductSize[]>([])
-    const [currentSize, setCurrentSize] = useState<ProductSize | undefined>(undefined);
-
-    useEffect(() => {
-        if (currentColor === undefined && variations.length > 0) {
-            setCurrentColor(variations[0].color)
-        }
-
-        if (currentSize === undefined && variations.length > 0){
-            if (variations[0].sizes.length > 0) {
-                setCurrentSize(variations[0].sizes[0]);
-            }
-        }
-
-        const clrs: string[] = [];
-        variations.map(variation => {
-            clrs.push(variation.color);
-        });
-        setColors(clrs);
-    }, [currentColor, variations]);
+    const dispatch = useAppDispatch();
+    const {
+        id,
+        color,
+        price,
+        size,
+        images,
+        colors,
+        sizes,
+    } = useAppSelector(productSelector);
 
     useEffect(() => {
-        const imgs: ProductImageView[] = [];
-        const szs: ProductSize[] = [];
-        variations.map(variation => {
-            if (variation.color === currentColor) {
-                variation.images.map(url => {
-                    imgs.push({
-                        url,
-                        alt: title,
-                    })
-                });
-                variation.sizes.map(size => {
-                    szs.push({
-                        size: size.size,
-                        price: size.price
-                    })
-                });
-            }
-        });
-        setImages(imgs);
-        setSizes(szs);
-    }, [variations, currentColor, colors]);
+        if (productId !== id && id === undefined) {
+            dispatch(setId(props.id));
+            dispatch(setName(title));
+            dispatch(setVariations(variations));
+        }
+    }, [variations, id, title, productId, dispatch]);
+
+    const onSizeSelected = (size: ProductSize) => {
+        dispatch(setSize(size.size));
+        dispatch(setPrice(size.price));
+    };
+
+    const onColorSelected = (color: string) => {
+        dispatch(setColor(color));
+    }
 
     return (
         <>
@@ -127,23 +121,23 @@ const ProductDetail: FC<Props> = (props) => {
 
                     <div>
                         <ProductDetailBrand name={brand}/>
-                        {currentColor !== undefined && (
+                        {color !== undefined && (
                             <>
                                 <ProductDetailColors
                                     colors={colors}
-                                    colorSelected={currentColor}
-                                    onColorSelected={setCurrentColor}
+                                    colorSelected={color}
+                                    onColorSelected={onColorSelected}
                                 />
                             </>
                         )}
                         <ProductDetailSizes
                             sizes={sizes}
-                            sizeSelected={currentSize || {size: '', price: 0}}
-                            onSizeSelected={(size) => setCurrentSize(size)}
+                            sizeSelected={{size: size || '', price: price||0}}
+                            onSizeSelected={onSizeSelected}
                         />
 
-                        {currentSize !== undefined && (
-                            <ProductDetailPrice price={currentSize?.price}/>
+                        {price !== undefined && (
+                            <ProductDetailPrice price={price}/>
                         )}
 
                         <Button className="w-full mt-10">
@@ -160,6 +154,32 @@ const ProductDetail: FC<Props> = (props) => {
             </section>
 
             <ProductDetailRelated products={related}/>
+
+            <section>
+                <div className="mx-auto max-w-lg mt-40">
+                    <div className="bg-white rounded-lg overflow-hidden shadow-lg">
+                        <div className="px-6 py-4">
+                            <div className="flex justify-between items-center">
+                                <img className="h-8" src="https://www.svgrepo.com/show/499847/company.svg"
+                                     alt="Workflow logo"/>
+                                <span className="font-medium text-gray-600">05/24</span>
+                            </div>
+                            <div className="mt-4">
+                                <div className="font-bold text-gray-800 text-xl">**** **** **** 1234</div>
+                                <div className="flex justify-between items-center mt-2">
+                                    <div className="text-sm text-gray-600">CARDHOLDER NAME</div>
+                                    <img className="h-10 w-10" src="https://www.svgrepo.com/show/362011/mastercard.svg"
+                                         alt="Mastercard logo"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="bg-gray-100 px-6 py-4">
+                            <div className="font-medium text-gray-600">CARD VERIFICATION VALUE</div>
+                            <div className="text-lg font-bold text-gray-800 mt-2">***</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </>
     )
 }

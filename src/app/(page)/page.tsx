@@ -2,7 +2,7 @@ import {ProductDetail} from "@components/templates";
 import type {Metadata} from "next";
 
 async function getData() {
-    const res = await fetch('https://65f7c43db4f842e80885facc.mockapi.io/api/v1/products/1');
+    const res = await fetch(`${process.env.API_URL}/products/1`);
 
     if (!res.ok) {
         throw new Error('Network response was not ok');
@@ -25,7 +25,7 @@ export default async function Home(props: Props) {
 
     const data = await getData();
 
-    const {title, brand, description, variations, related, hero} = data;
+    const {id, title, brand, description, variations, related, hero} = data;
     const {main, sub, special} = hero;
 
     metadata.title = title;
@@ -34,6 +34,7 @@ export default async function Home(props: Props) {
     return (
         <main>
             <ProductDetail
+                id={id}
                 title={title}
                 heroText={
                     {
@@ -47,6 +48,7 @@ export default async function Home(props: Props) {
                 variations={variations}
                 related={related}
             />
+
         </main>
     );
 }
