@@ -4,6 +4,9 @@ provider:
   name: aws
   runtime: nodejs20.x
   region: us-east-1 # o tu región preferida
+  environment:
+    API_URL: ${env:API_URL}
+    NEXT_PUBLIC_API_URL: ${env:NEXT_PUBLIC_API_URL}
 
 functions:
   nextApp:
