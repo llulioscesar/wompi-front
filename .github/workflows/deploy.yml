@@ -42,3 +42,6 @@ jobs:
         run: |
           npm install -g serverless
           serverless deploy
+        env:
+          API_URL: ${{ secrets.API_URL }}
+          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
