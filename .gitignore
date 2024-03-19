@@ -40,3 +40,7 @@ jspm_packages
 # IDE
 .idea
 .vscode
+
+**/*.DS_Store
+
+.env
