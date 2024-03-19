@@ -1,0 +1,20 @@
+service: nextjs-app
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  region: us-east-1 # o tu región preferida
+
+functions:
+  nextApp:
+    handler: index.handler
+    events:
+      - http:
+          path: /
+          method: GET
+      - http:
+          path: /{proxy+}
+          method: ANY
+
+plugins:
+  - serverless-nextjs-plugin

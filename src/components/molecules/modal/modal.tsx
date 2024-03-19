@@ -12,7 +12,7 @@ const Modal: FC<Props> = (props) => {
     const {children, show, onClose, title} = props;
     return (
         <>
-            <div className={`${show ? '' : 'hidden'} bg-black bg-opacity-75 overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 max-h-full`}>
+            <div className={`${show ? '' : 'hidden'} bg-black bg-opacity-75 overflow-y-auto overflow-x-hidden fixed top-0 right-0 bottom-0 left-0 z-50 justify-center items-center w-full md:inset-0`}>
                 <div className="relative p-4 w-full max-w-md max-h-full mx-auto">
                     <div className="relative bg-bg-color rounded-lg shadow">
                         <div
