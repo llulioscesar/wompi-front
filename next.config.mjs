@@ -8,6 +8,11 @@ const __dirname = dirname(__filename);
 const sassDirectories = glob.sync(join(__dirname, 'src/**/'))
 
 const nextConfig = {
+    output: 'export',
+    images:{
+        unoptimized: true,
+    },
+    distDir: 'build',
     sassOptions: {
         includePaths: sassDirectories,
     },

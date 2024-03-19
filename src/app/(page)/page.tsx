@@ -11,10 +11,14 @@ async function getData() {
     return await res.json();
 }
 
-export const metadata: Metadata = {
-    title: "",
-    description: "",
-};
+export async function generateMetadata() {
+    const data = await getData();
+    const {title, description} = data;
+    return {
+        title,
+        description
+    };
+}
 
 type Props = {
     params: {slug: string};
@@ -27,9 +31,6 @@ export default async function Home(props: Props) {
 
     const {id, title, brand, description, variations, related, hero} = data;
     const {main, sub, special} = hero;
-
-    metadata.title = title;
-    metadata.description = description;
 
     return (
         <main>
