@@ -41,6 +41,7 @@ jspm_packages
 .idea
 .vscode
 
+.DS_Store
 **/*.DS_Store
 
 .env
