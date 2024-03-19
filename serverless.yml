@@ -19,5 +19,5 @@ functions:
           path: /{proxy+}
           method: ANY
 
-plugins:
-  - serverless-nextjs-plugin
+myNextApplication:
+  component: "./node_modules/@sls-next/serverless-component"
