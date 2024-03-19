@@ -8,10 +8,14 @@ services:
       context: .
       dockerfile: Dockerfile
       target: dev
+      args:
+        - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+        - API_URL=${API_URL}
     ports:
         - "3000:3000"
     volumes:
       - .:/app
+      - /app/.next
       - /app/node_modules
     env_file:
       - .env
