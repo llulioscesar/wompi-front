@@ -2,6 +2,10 @@
 
 Este proyecto implementa un flujo de pago con tarjeta de crédito como parte de un proceso de incorporación para una tienda en línea. Se trata de una aplicación de una sola página (SPA) centrada en dispositivos móviles, que permite a los usuarios comprar un producto y pagar utilizando sus datos de tarjeta de crédito.
 
+## Demostración
+
+[Demo en Vivo](https://d2tdxpq0s2rsmq.cloudfront.net/)
+
 ## Proceso del Negocio
 
 El proceso de negocio se divide en cuatro pasos principales:
