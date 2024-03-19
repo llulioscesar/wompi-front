@@ -26,6 +26,7 @@ jobs:
           touch .env
           echo "NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }}" >> .env
           echo "API_URL=${{ secrets.API_URL }}" >> .env
+          cat .env
 
       - name: Build
         run: npm run build
